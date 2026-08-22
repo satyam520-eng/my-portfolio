@@ -1,4 +1,6 @@
-// Simple scroll reveal effect
+// ==========================================
+// SCROLL REVEAL ANIMATION
+// ==========================================
 
 const elements = document.querySelectorAll(
     ".section-heading, .about-grid, .skill-card, .project-card, .timeline-item"
@@ -13,6 +15,9 @@ const observer = new IntersectionObserver(
 
                 entry.target.classList.add("show");
 
+                // Stop observing after the animation happens
+                observer.unobserve(entry.target);
+
             }
 
         });
@@ -24,9 +29,13 @@ const observer = new IntersectionObserver(
 );
 
 
-elements.forEach((element) => {
+// Add hidden state
+elements.forEach((element, index) => {
 
     element.classList.add("hidden");
+
+    // Slight delay between elements
+    element.style.transitionDelay = `${(index % 4) * 0.08}s`;
 
     observer.observe(element);
 
